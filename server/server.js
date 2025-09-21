@@ -12,13 +12,19 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://rentique-frontend.onrender.com', 'https://your-custom-domain.com']
-    : ['http://localhost:3000', 'http://localhost:3001'],
-  credentials: true
+  origin: [
+    'https://rentique-frontend.onrender.com',
+    'http://localhost:3000',
+    'http://localhost:3001'
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // ADD THIS
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'] // ADD THIS
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
