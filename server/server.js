@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const nodemailer = require('nodemailer');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // Load environment variables
 dotenv.config();
@@ -24,8 +25,11 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Database connection
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('MongoDB connected successfully'))
-    .catch(err => console.error('MongoDB connection error:', err));
-
+    .catch(err => {
+        console.error('MongoDB connection error:', err);
+        console.log('MONGODB_URI:', process.env.MONGODB_URI ? 'is set' : 'is NOT set');
+        process.exit(1); // Exit if DB connection fails
+    });
 // Create Nodemailer transporter
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
