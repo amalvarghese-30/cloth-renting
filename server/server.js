@@ -64,19 +64,19 @@ const rentalRoutes = require('./routes/rentals');
 const adminUsersRoutes = require('./routes/adminUsers');
 
 // Use routes with proper prefixes
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/admin/users', adminUsersRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/rentals', rentalRoutes);
+app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
+app.use('/admin/users', adminUsersRoutes);
+app.use('/products', productRoutes);
+app.use('/rentals', rentalRoutes);
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
+app.get('/health', (req, res) => {
     res.json({ status: 'OK', message: 'Server is running' });
 });
 
 // Stripe test endpoint
-app.get('/api/test-stripe', async (req, res) => {
+app.get('/test-stripe', async (req, res) => {
     try {
         const paymentIntent = await stripe.paymentIntents.create({
             amount: 1000, // $10.00
