@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #212529;
+  line-height: 1.6;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding-top: 80px;
+  /* Account for fixed header */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.mt-3 {
+  margin-top: 1rem;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cuRsor: pointer;
+  transition: all 0.3s;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background-color: #3a0ca3;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #4361ee;
+}
+
+.btn-outline-primary {
+  background-color: transparent;
+  border: 2px solid #3a0ca3;
+  color: #3a0ca3;
+}
+
+.btn-outline-primary:hover {
+  background-color: #3a0ca3;
+  color: white;
+}
+
+.btn-accent {
+  background-color: #f72585;
+  color: white;
+}
+
+.btn-accent:hover {
+  background-color: #3a0ca3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .main-content {
+    padding-top: 70px;
+  }
+}

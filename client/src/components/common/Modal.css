@@ -1,0 +1,156 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1.5rem 0;
+    border-bottom: none;
+}
+
+.modal-title {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    color: #3a0ca3;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cuRsor: pointer;
+    color: #6c757d;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #f72585;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #3a0ca3;
+    box-shadow: 0 0 0 2px rgba(58, 12, 163, 0.2);
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.form-check-input {
+    margin-right: 0.5rem;
+}
+
+.form-check-label {
+    margin-bottom: 0;
+    color: #666;
+}
+
+.btn-primary {
+    background-color: #3a0ca3;
+    border-color: #3a0ca3;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #4361ee;
+    border-color: #4361ee;
+}
+
+.error-message {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 0.75rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.switch-btn {
+    background: none;
+    border: none;
+    color: #3a0ca3;
+    text-decoration: underline;
+    cuRsor: pointer;
+    transition: color 0.3s;
+}
+
+.switch-btn:hover {
+    color: #f72585;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+    .modal-content {
+        margin: 1rem;
+        max-height: 95vh;
+    }
+
+    .modal-header {
+        padding: 1rem 1rem 0;
+    }
+
+    .modal-body {
+        padding: 1rem;
+    }
+}
