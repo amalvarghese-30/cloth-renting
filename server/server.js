@@ -78,48 +78,20 @@ const adminUsersRoutes = require('./routes/adminUsers');
 const newsletterRoutes = require('./routes/newsletter');
 
 // Use routes with proper prefixes
-<<<<<<< HEAD
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/admin/users', adminUsersRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/rentals', rentalRoutes);
 app.use('/api/newsletter', newsletterRoutes);
-=======
-app.use('/auth', authRoutes);
-app.use('/users', userRoutes);
-app.use('/admin/users', adminUsersRoutes);
-app.use('/products', productRoutes);
-app.use('/rentals', rentalRoutes);
->>>>>>> 643d84298e0d7330434224d2f9fb49c4081b1433
 
 // Health check endpoint
 app.get('/health', (req, res) => {
     res.json({ status: 'OK', message: 'Server is running' });
 });
 
-<<<<<<< HEAD
 // Contact form endpoint with SMTP email (KEEP THIS)
 app.post('/api/contact', async (req, res) => {
-=======
-// Stripe test endpoint
-app.get('/test-stripe', async (req, res) => {
-    try {
-        const paymentIntent = await stripe.paymentIntents.create({
-            amount: 1000, // $10.00
-            currency: 'usd',
-            metadata: { test: 'true' }
-        });
-        res.json({ success: true, clientSecret: paymentIntent.client_secret });
-    } catch (error) {
-        console.error('Stripe error:', error);
-        res.status(500).json({ success: false, error: error.message });
-    }
-});
-
-// Contact form endpoint with SMTP email
-app.post('/contact', async (req, res) => {
->>>>>>> 643d84298e0d7330434224d2f9fb49c4081b1433
     try {
         const { name, email, subject, message } = req.body;
 
