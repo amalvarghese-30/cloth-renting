@@ -26,8 +26,8 @@ const corsOptions = {
     ],
     credentials: true,
     optionsSuccessStatus: 200,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // ADD THIS
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'] // ADD THIS
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 };
 
 app.use(cors(corsOptions));
@@ -38,18 +38,13 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Database connection
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('MongoDB connected successfully'))
-<<<<<<< HEAD
-    .catch(err => console.error('MongoDB connection error:', err));
-
-// Create Nodemailer transporter (KEEP THIS FOR CONTACT FORM)
-=======
     .catch(err => {
         console.error('MongoDB connection error:', err);
         console.log('MONGODB_URI:', process.env.MONGODB_URI ? 'is set' : 'is NOT set');
         process.exit(1); // Exit if DB connection fails
     });
+
 // Create Nodemailer transporter
->>>>>>> 643d84298e0d7330434224d2f9fb49c4081b1433
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
