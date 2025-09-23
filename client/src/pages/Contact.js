@@ -1,3 +1,4 @@
+// Contact.js - Updated with consistent styling
 import React, { useState } from 'react';
 import './Contact.css';
 
@@ -85,7 +86,7 @@ const Contact = () => {
                             </div>
                             <div className="info-content">
                                 <h3>Email Us</h3>
-                                <p>support@fashionrent.com<br />info@fashionrent.com</p>
+                                <p>support@rentique.com<br />info@rentique.com</p>
                             </div>
                         </div>
 
@@ -110,7 +111,7 @@ const Contact = () => {
                                     <p>We'll get back to you within 24 hours.</p>
                                     <button
                                         onClick={() => setSubmitted(false)}
-                                        className="btn btn-primary"
+                                        className="btn"
                                     >
                                         Send Another Message
                                     </button>
@@ -170,12 +171,13 @@ const Contact = () => {
 
                                     <button
                                         type="submit"
-                                        className="btn btn-primary submit-btn"
+                                        className="submit-btn"
                                         disabled={loading}
                                     >
                                         {loading ? (
                                             <>
-                                                <i className="fas fa-spinner fa-spin"></i> Sending...
+                                                <span className="loading-spinner"></span>
+                                                Sending...
                                             </>
                                         ) : (
                                             'Send Message'

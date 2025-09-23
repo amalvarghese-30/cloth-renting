@@ -1,4 +1,4 @@
-// server.js - Complete with SMTP email functionality
+// server.js - Keep contact form functionality, fix newsletter imports
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -8,6 +8,13 @@ const nodemailer = require('nodemailer');
 // Load environment variables
 dotenv.config();
 
+// Add this at the top of server.js after dotenv.config()
+console.log('🔍 DEBUG - Environment Variables:');
+console.log('SMTP_HOST:', process.env.SMTP_HOST || 'NOT SET');
+console.log('SMTP_PORT:', process.env.SMTP_PORT || 'NOT SET');
+console.log('SMTP_USER:', process.env.SMTP_USER || 'NOT SET');
+console.log('SMTP_PASS:', process.env.SMTP_PASS ? 'SET (' + process.env.SMTP_PASS.length + ' chars)' : 'NOT SET');
+console.log('Current directory:', __dirname);
 const app = express();
 
 // Middleware
@@ -20,11 +27,11 @@ mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('MongoDB connected successfully'))
     .catch(err => console.error('MongoDB connection error:', err));
 
-// Create Nodemailer transporter
+// Create Nodemailer transporter (KEEP THIS FOR CONTACT FORM)
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
-    secure: false, // true for 465, false for other ports
+    secure: false,
     auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
@@ -46,6 +53,7 @@ const userRoutes = require('./routes/users');
 const productRoutes = require('./routes/products');
 const rentalRoutes = require('./routes/rentals');
 const adminUsersRoutes = require('./routes/adminUsers');
+const newsletterRoutes = require('./routes/newsletter');
 
 // Use routes with proper prefixes
 app.use('/api/auth', authRoutes);
@@ -53,28 +61,14 @@ app.use('/api/users', userRoutes);
 app.use('/api/admin/users', adminUsersRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/rentals', rentalRoutes);
+app.use('/api/newsletter', newsletterRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
     res.json({ status: 'OK', message: 'Server is running' });
 });
 
-// Stripe test endpoint
-app.get('/api/test-stripe', async (req, res) => {
-    try {
-        const paymentIntent = await stripe.paymentIntents.create({
-            amount: 1000, // $10.00
-            currency: 'usd',
-            metadata: { test: 'true' }
-        });
-        res.json({ success: true, clientSecret: paymentIntent.client_secret });
-    } catch (error) {
-        console.error('Stripe error:', error);
-        res.status(500).json({ success: false, error: error.message });
-    }
-});
-
-// Contact form endpoint with SMTP email
+// Contact form endpoint with SMTP email (KEEP THIS)
 app.post('/api/contact', async (req, res) => {
     try {
         const { name, email, subject, message } = req.body;
@@ -86,18 +80,20 @@ app.post('/api/contact', async (req, res) => {
 
         // Email options for admin notification
         const mailOptions = {
-            from: email,
+            from: `"Contact Form" <${process.env.SMTP_USER}>`, // Fixed from field
             to: process.env.CONTACT_EMAIL || process.env.SMTP_USER,
             subject: `Contact Form: ${subject}`,
             html: `
-                <h2>New Contact Form Submission</h2>
-                <p><strong>Name:</strong> ${name}</p>
-                <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Subject:</strong> ${subject}</p>
-                <p><strong>Message:</strong></p>
-                <p>${message}</p>
-                <hr>
-                <p>This email was sent from the contact form on your website.</p>
+                <div style="font-family: Arial, sans-serif; padding: 20px;">
+                    <h2 style="color: #8B7355;">New Contact Form Submission</h2>
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Subject:</strong> ${subject}</p>
+                    <p><strong>Message:</strong></p>
+                    <p style="background: #f5f5f5; padding: 15px; border-radius: 5px;">${message}</p>
+                    <hr>
+                    <p><em>This email was sent from the contact form on your website.</em></p>
+                </div>
             `,
         };
 
@@ -106,16 +102,26 @@ app.post('/api/contact', async (req, res) => {
 
         // Send confirmation email to user
         const userMailOptions = {
-            from: process.env.CONTACT_EMAIL || process.env.SMTP_USER,
+            from: `"Rentique Support" <${process.env.SMTP_USER}>`,
             to: email,
-            subject: 'Thank you for contacting us',
+            subject: 'Thank you for contacting Rentique',
             html: `
-                <h2>Thank you for your message, ${name}!</h2>
-                <p>We have received your inquiry and will get back to you within 24 hours.</p>
-                <p><strong>Your message:</strong></p>
-                <p>${message}</p>
-                <hr>
-                <p>Best regards,<br/>The FashionRent Team</p>
+                <div style="font-family: Arial, sans-serif; padding: 20px;">
+                    <h2 style="color: #8B7355;">Thank you for your message, ${name}!</h2>
+                    <p>We have received your inquiry and will get back to you within 24 hours.</p>
+                    
+                    <div style="background: #f9f9f9; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                        <p><strong>Your message:</strong></p>
+                        <p>${message}</p>
+                    </div>
+                    
+                    <p><strong>Our business hours:</strong><br>
+                    Monday - Friday: 9AM - 6PM EST<br>
+                    Saturday: 10AM - 4PM EST</p>
+                    
+                    <hr>
+                    <p>Best regards,<br><strong>The Rentique Team</strong></p>
+                </div>
             `,
         };
 

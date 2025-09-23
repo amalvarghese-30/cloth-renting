@@ -1,3 +1,4 @@
+// Login.js - Updated with consistent styling
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -74,10 +75,17 @@ const Login = () => {
 
                     <button
                         type="submit"
-                        className="btn btn-primary login-btn"
+                        className="login-btn"
                         disabled={loading}
                     >
-                        {loading ? 'Signing in...' : 'Sign In'}
+                        {loading ? (
+                            <>
+                                <span className="loading-spinner"></span>
+                                Signing in...
+                            </>
+                        ) : (
+                            'Sign In'
+                        )}
                     </button>
                 </form>
 

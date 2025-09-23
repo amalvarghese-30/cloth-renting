@@ -1,19 +1,21 @@
+/* Register.css - Updated with consistent color scheme */
 .register-container {
     min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: #fefefe;
 }
 
 .register-card {
     background: white;
     padding: 2.5rem;
     border-radius: 16px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
     width: 100%;
     max-width: 500px;
+    border: 1px solid #eee;
 }
 
 .register-header {
@@ -22,14 +24,14 @@
 }
 
 .register-header h2 {
-    color: #3a0ca3;
+    color: #2c2c2c;
     margin-bottom: 0.5rem;
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
 }
 
 .register-header p {
-    color: #6c757d;
+    color: #777;
     font-size: 1.1rem;
 }
 
@@ -52,7 +54,7 @@
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
-    color: #333;
+    color: #2c2c2c;
     font-size: 0.9rem;
 }
 
@@ -63,12 +65,15 @@
     border-radius: 10px;
     font-size: 1rem;
     transition: all 0.3s ease;
+    background: #fafafa;
+    font-family: inherit;
 }
 
 .form-group input:focus {
-    border-color: #3a0ca3;
+    border-color: #8B7355;
     outline: none;
-    box-shadow: 0 0 0 3px rgba(58, 12, 163, 0.1);
+    box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+    background: white;
 }
 
 .register-btn {
@@ -78,6 +83,25 @@
     font-weight: 600;
     margin-top: 1rem;
     border-radius: 10px;
+    background: #8B7355;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.register-btn:hover:not(:disabled) {
+    background: #6d5a41;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 115, 85, 0.3);
+}
+
+.register-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
 .register-links {
@@ -85,19 +109,34 @@
 }
 
 .register-links a {
-    color: #3a0ca3;
+    color: #8B7355;
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.register-links a:after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #8B7355;
+    transition: width 0.3s ease;
 }
 
 .register-links a:hover {
-    color: #4361ee;
-    text-decoration: underline;
+    color: #6d5a41;
+}
+
+.register-links a:hover:after {
+    width: 100%;
 }
 
 .register-links p {
-    color: #6c757d;
+    color: #777;
     font-size: 0.9rem;
 }
 
@@ -108,6 +147,25 @@
     border-radius: 8px;
     margin-bottom: 1.5rem;
     border: 1px solid #f5c6cb;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 0.5rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @media (max-width: 768px) {
@@ -125,5 +183,9 @@
 
     .register-header h2 {
         font-size: 1.8rem;
+    }
+
+    .register-container {
+        padding: 1rem;
     }
 }

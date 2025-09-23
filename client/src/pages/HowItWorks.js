@@ -1,3 +1,4 @@
+// HowItWorks.js - Minor text correction
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './HowItWorks.css';
@@ -17,7 +18,7 @@ const HowItWorks = () => {
                             <div className="step-number">1</div>
                             <div className="step-content">
                                 <h3>Browse & Select</h3>
-                                <p>Explore our collection and choose the items you want to rent. Use filteRs to find exactly what you need.</p>
+                                <p>Explore our collection and choose the items you want to rent. Use filters to find exactly what you need.</p>
                             </div>
                         </div>
 
@@ -45,12 +46,12 @@ const HowItWorks = () => {
                     <div className="faq-list">
                         <div className="faq-item">
                             <h4>How does the rental process work?</h4>
-                            <p>Our rental process is simple: browse our collection, select your rental period, complete your order, and we'll deliver the items to your dooRstep. After your rental period, we'll schedule a pickup for the return.</p>
+                            <p>Our rental process is simple: browse our collection, select your rental period, complete your order, and we'll deliver the items to your doorstep. After your rental period, we'll schedule a pickup for the return.</p>
                         </div>
 
                         <div className="faq-item">
                             <h4>What if I damage the clothing?</h4>
-                            <p>We undeRstand that accidents happen. We offer damage protection plans that you can add to your rental. For minor damages, we typically handle them without additional charges. For significant damages, fees will be based on the extent of damage and the item's value.</p>
+                            <p>We understand that accidents happen. We offer damage protection plans that you can add to your rental. For minor damages, we typically handle them without additional charges. For significant damages, fees will be based on the extent of damage and the item's value.</p>
                         </div>
 
                         <div className="faq-item">
@@ -60,15 +61,15 @@ const HowItWorks = () => {
 
                         <div className="faq-item">
                             <h4>What is your cancellation policy?</h4>
-                            <p>You can cancel your rental up to 24 houRs before the scheduled delivery date for a full refund. Cancellations made less than 24 houRs in advance may incur a small processing fee.</p>
+                            <p>You can cancel your rental up to 24 hours before the scheduled delivery date for a full refund. Cancellations made less than 24 hours in advance may incur a small processing fee.</p>
                         </div>
                     </div>
                 </div>
 
                 <div className="cta-section">
                     <h2>Ready to Get Started?</h2>
-                    <p>Join thousands of satisfied customeRs who enjoy premium fashion without the commitment.</p>
-                    <Link to="/products" className="btn btn-accent btn-lg">
+                    <p>Join thousands of satisfied customers who enjoy premium fashion without the commitment.</p>
+                    <Link to="/products" className="btn-accent">
                         Start Renting
                     </Link>
                 </div>

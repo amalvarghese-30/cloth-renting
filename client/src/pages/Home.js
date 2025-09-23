@@ -41,7 +41,7 @@ const Home = ({ onRentClick }) => {
 
     useEffect(() => {
         const bannerInterval = setInterval(() => {
-            setCurrentBanner((prev) => (prev + 1) % 6);
+            setCurrentBanner((prev) => (prev + 1) % 2);
         }, 5000);
 
         return () => clearInterval(bannerInterval);
@@ -53,43 +53,22 @@ const Home = ({ onRentClick }) => {
             <section className="hero">
                 <div
                     className={`hero-banner ${currentBanner === 0 ? 'active' : ''}`}
-                    style={{ backgroundImage: "url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')" }}
-                ></div>
-                <div
-                    className={`hero-banner ${currentBanner === 1 ? 'active' : ''}`}
-                    style={{ backgroundImage: "url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')" }}
-                ></div>
-                <div
-                    className={`hero-banner ${currentBanner === 2 ? 'active' : ''}`}
-                    style={{ backgroundImage: "url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')" }}
-                ></div>
-                <div
-                    className={`hero-banner ${currentBanner === 3 ? 'active' : ''}`}
-                    style={{ backgroundImage: "url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')" }}
-                ></div>
-                <div
-                    className={`hero-banner ${currentBanner === 4 ? 'active' : ''}`}
                     style={{ backgroundImage: "url('https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')" }}
                 ></div>
                 <div
-                    className={`hero-banner ${currentBanner === 5 ? 'active' : ''}`}
-                    style={{ backgroundImage: "url('https://images.unsplash.com/photo-1544441893-675973e31985?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')" }}
+                    className={`hero-banner ${currentBanner === 1 ? 'active' : ''}`}
+                    style={{ backgroundImage: "url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')" }}
                 ></div>
 
-                <div className="container">
-                    <div className="hero-content">
-                        <h1>Elevate Your Style with Premium Fashion Rentals</h1>
-                        <p>Discover designer pieces for every occasion without the commitment. Refresh your wardrobe sustainably with our curated collection.</p>
-                        <div className="hero-buttons">
-                            <Link to="/products" className="btn btn-primary">Explore Collection</Link>
-                            <Link to="/how-it-works" className="btn btn-outline">How It Works</Link>
-                        </div>
-                    </div>
-                </div>
+                <div className="banner-overlay"></div>
 
-                {/* Scroll indicator */}
-                <div className="scroll-indicator">
-                    <div className="scroll-arrow"></div>
+                <div className="hero-inner">
+                    <h1>Elevate Your Style with Premium Fashion Rentals</h1>
+                    <p>Discover designer pieces for every occasion without the commitment. Refresh your wardrobe sustainably with our curated collection.</p>
+                    <div className="hero-buttons">
+                        <Link to="/products" className="btn btn-primary">Explore Collection</Link>
+                        <Link to="/how-it-works" className="btn btn-outline">How It Works</Link>
+                    </div>
                 </div>
             </section>
 

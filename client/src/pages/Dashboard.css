@@ -1,6 +1,8 @@
+/* Dashboard.css - Updated with consistent color scheme */
 .dashboard {
     padding: 2rem 0;
     min-height: 80vh;
+    background: #fefefe;
 }
 
 .dashboard-header {
@@ -10,13 +12,13 @@
 
 .dashboard-header h1 {
     font-family: 'Playfair Display', serif;
-    color: #3a0ca3;
+    color: #2c2c2c;
     margin-bottom: 0.5rem;
     font-size: 2.5rem;
 }
 
 .dashboard-header p {
-    color: #6c757d;
+    color: #777;
     font-size: 1.2rem;
 }
 
@@ -31,15 +33,17 @@
     background: white;
     padding: 1.5rem;
     border-radius: 16px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eee;
     display: flex;
     align-items: center;
     gap: 1rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .stat-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .stat-icon {
@@ -50,19 +54,26 @@
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
-    background: rgba(67, 97, 238, 0.1);
-    color: #3a0ca3;
+    background: rgba(139, 115, 85, 0.1);
+    color: #8B7355;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover .stat-icon {
+    background: #8B7355;
+    color: white;
+    transform: scale(1.1);
 }
 
 .stat-info h3 {
     font-size: 2rem;
-    color: #3a0ca3;
+    color: #2c2c2c;
     margin-bottom: 0.25rem;
     font-weight: 700;
 }
 
 .stat-info p {
-    color: #6c757d;
+    color: #555;
     font-weight: 500;
 }
 
@@ -80,20 +91,36 @@
 }
 
 .section-header h2 {
-    color: #3a0ca3;
+    color: #2c2c2c;
     font-size: 1.5rem;
+    font-family: 'Playfair Display', serif;
 }
 
 .view-all {
-    color: #3a0ca3;
+    color: #8B7355;
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.view-all:after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #8B7355;
+    transition: width 0.3s ease;
 }
 
 .view-all:hover {
-    color: #4361ee;
-    text-decoration: underline;
+    color: #6d5a41;
+}
+
+.view-all:hover:after {
+    width: 100%;
 }
 
 .recent-activity,
@@ -101,7 +128,8 @@
     background: white;
     padding: 1.5rem;
     border-radius: 16px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eee;
 }
 
 .rentals-list {
@@ -137,12 +165,12 @@
 
 .rental-details h4 {
     margin-bottom: 0.25rem;
-    color: #333;
+    color: #2c2c2c;
     font-weight: 600;
 }
 
 .rental-period {
-    color: #6c757d;
+    color: #777;
     font-size: 0.9rem;
     margin-bottom: 0.5rem;
 }
@@ -182,14 +210,14 @@
 
 .rental-cost {
     font-weight: 600;
-    color: #3a0ca3;
+    color: #8B7355;
     font-size: 1.1rem;
 }
 
 .empty-state {
     text-align: center;
     padding: 3rem 2rem;
-    color: #6c757d;
+    color: #777;
 }
 
 .empty-state i {
@@ -199,13 +227,40 @@
 }
 
 .empty-state h3 {
-    color: #6c757d;
+    color: #777;
     margin-bottom: 0.5rem;
     font-size: 1.2rem;
+    font-family: 'Playfair Display', serif;
 }
 
 .empty-state p {
     margin-bottom: 1.5rem;
+    color: #555;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: #8B7355;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #6d5a41;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 115, 85, 0.3);
 }
 
 .action-cards {
@@ -228,25 +283,32 @@
 }
 
 .action-card:hover {
-    border-color: #3a0ca3;
+    border-color: #8B7355;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(58, 12, 163, 0.1);
+    box-shadow: 0 5px 15px rgba(139, 115, 85, 0.1);
 }
 
 .action-card i {
     font-size: 2rem;
-    color: #3a0ca3;
+    color: #8B7355;
     margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.action-card:hover i {
+    color: #6d5a41;
+    transform: scale(1.1);
 }
 
 .action-card h3 {
-    color: #3a0ca3;
+    color: #2c2c2c;
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
+    font-weight: 600;
 }
 
 .action-card p {
-    color: #6c757d;
+    color: #777;
     font-size: 0.9rem;
 }
 
@@ -278,6 +340,16 @@
     .rental-cost {
         text-align: center;
     }
+
+    .action-cards {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .action-card {
+        flex: 1;
+        min-width: 150px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -297,5 +369,9 @@
 
     .view-all {
         align-self: flex-end;
+    }
+
+    .action-cards {
+        flex-direction: column;
     }
 }

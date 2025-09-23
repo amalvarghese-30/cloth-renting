@@ -1,6 +1,6 @@
-/* Footer.css */
+/* Footer.css - Complete working version */
 .footer {
-    background: #0f172a;
+    background: #2c2c2c;
     color: white;
     padding: 70px 0 25px;
     margin-top: auto;
@@ -19,6 +19,7 @@
     font-family: 'Playfair Display', serif;
     margin-bottom: 20px;
     font-weight: 600;
+    color: #fff;
 }
 
 .footer-logo {
@@ -58,12 +59,12 @@
     left: 0;
     width: 0;
     height: 1px;
-    background: rgba(255, 255, 255, 0.7);
+    background: #8B7355;
     transition: width 0.3s ease;
 }
 
 .footer-section a:hover {
-    color: white;
+    color: #fff;
 }
 
 .footer-section a:hover:after {
@@ -90,8 +91,9 @@
 }
 
 .social-icons a:hover {
-    background: #3a0ca3;
+    background: #8B7355;
     transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(139, 115, 85, 0.3);
 }
 
 .newsletter-form {
@@ -109,6 +111,7 @@
     background: rgba(255, 255, 255, 0.9);
     font-family: 'Inter', sans-serif;
     font-size: 0.9rem;
+    color: #2c2c2c;
 }
 
 .newsletter-form input:focus {
@@ -116,19 +119,57 @@
     background: white;
 }
 
+.newsletter-form input::placeholder {
+    color: #999;
+}
+
+.newsletter-form input:disabled {
+    background: #e9ecef;
+    cursor: not-allowed;
+}
+
 .newsletter-form button {
     padding: 0 20px;
     border: none;
-    background: #3a0ca3;
+    background: #8B7355;
     color: white;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s;
+    white-space: nowrap;
 }
 
-.newsletter-form button:hover {
-    background: #4361ee;
+.newsletter-form button:hover:not(:disabled) {
+    background: #6d5a41;
+    transform: translateY(-1px);
+}
+
+.newsletter-form button:disabled {
+    background: #a89176;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.subscription-message {
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-align: center;
+    border: 1px solid;
+}
+
+.subscription-message.success {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+    border-color: rgba(40, 167, 69, 0.3);
+}
+
+.subscription-message.error {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    border-color: rgba(220, 53, 69, 0.3);
 }
 
 .footer-divider {
@@ -161,10 +202,26 @@
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.3s;
+    position: relative;
+}
+
+.footer-links a:after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #8B7355;
+    transition: width 0.3s ease;
 }
 
 .footer-links a:hover {
-    color: white;
+    color: #fff;
+}
+
+.footer-links a:hover:after {
+    width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -204,5 +261,13 @@
     .footer-links {
         flex-direction: column;
         gap: 10px;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .footer-section {
+        text-align: center;
     }
 }

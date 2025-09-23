@@ -1,3 +1,4 @@
+// Products.js - Updated with consistent styling
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useProducts } from '../hooks/useProducts';
@@ -30,13 +31,15 @@ const Products = ({ onRentClick }) => {
     };
 
     const clearFilters = () => {
-        setFilters({});
+        setFilters({
+            category: '',
+            size: '',
+            brand: '',
+            minPrice: '',
+            maxPrice: ''
+        });
         setSearchParams({});
     };
-
-    if (error) {
-        return <div className="error-message">Error loading products: {error}</div>;
-    }
 
     // Safe products array to prevent undefined errors
     const safeProducts = products || [];
@@ -50,7 +53,7 @@ const Products = ({ onRentClick }) => {
                 </div>
 
                 <div className="filter-section">
-                    <h3>Filters</h3>
+                    <h3>Find Your Perfect Style</h3>
                     <div className="filter-grid">
                         <div className="filter-group">
                             <label>Category</label>
@@ -100,13 +103,14 @@ const Products = ({ onRentClick }) => {
                         </div>
 
                         <div className="filter-group">
-                            <label>Price Range</label>
+                            <label>Price Range ($)</label>
                             <div className="price-range">
                                 <input
                                     type="number"
                                     placeholder="Min"
                                     value={filters.minPrice}
                                     onChange={(e) => handleFilterChange('minPrice', e.target.value)}
+                                    min="0"
                                 />
                                 <span>-</span>
                                 <input
@@ -114,6 +118,7 @@ const Products = ({ onRentClick }) => {
                                     placeholder="Max"
                                     value={filters.maxPrice}
                                     onChange={(e) => handleFilterChange('maxPrice', e.target.value)}
+                                    min="0"
                                 />
                             </div>
                         </div>
@@ -125,11 +130,19 @@ const Products = ({ onRentClick }) => {
                 </div>
 
                 {loading ? (
-                    <LoadingSpinner />
+                    <div className="loading-container">
+                        <LoadingSpinner />
+                        <p>Loading our finest collection...</p>
+                    </div>
+                ) : error ? (
+                    <div className="error-message">
+                        Error loading products: {error}
+                    </div>
                 ) : (
                     <>
                         <div className="products-count">
                             {safeProducts.length} product{safeProducts.length !== 1 ? 's' : ''} found
+                            {Object.values(filters).some(filter => filter) && ' matching your criteria'}
                         </div>
 
                         <div className="products-grid">
@@ -146,6 +159,13 @@ const Products = ({ onRentClick }) => {
                             <div className="no-products">
                                 <h3>No products found</h3>
                                 <p>Try adjusting your filters to see more results.</p>
+                                <button
+                                    className="clear-filters"
+                                    onClick={clearFilters}
+                                    style={{ marginTop: '1rem' }}
+                                >
+                                    Clear All Filters
+                                </button>
                             </div>
                         )}
                     </>

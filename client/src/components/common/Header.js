@@ -1,9 +1,10 @@
-// client/src/components/common/Header.js
+// Header.js - Updated with consistent styling
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
 import './Header.css';
+import logo from '../../assets/images/unnamed.png';
 
 const Header = ({ onLoginClick, onRegisterClick }) => {
     const { user, logout } = useAuth();
@@ -23,7 +24,11 @@ const Header = ({ onLoginClick, onRegisterClick }) => {
         <header className="header">
             <div className="container">
                 <Link to="/" className="logo" onClick={() => setIsMenuOpen(false)}>
-                    <h2>Rentique</h2>
+                    <img
+                        src={logo} // Use the imported logo
+                        alt="Rentique - Premium Fashion Rentals"
+                        className="logo-image"
+                    />
                 </Link>
 
                 <nav className={`nav ${isMenuOpen ? 'nav-open' : ''}`}>

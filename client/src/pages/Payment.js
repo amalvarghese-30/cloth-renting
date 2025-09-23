@@ -1,3 +1,4 @@
+// Payment.js - Fixed version
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
@@ -17,7 +18,7 @@ const Payment = () => {
     });
 
     const subtotal = getCartTotal();
-    const deliveryFee = 9.99;
+    const deliveryFee = 299; // Rs instead of $
     const tax = subtotal * 0.08;
     const total = subtotal + deliveryFee + tax;
 
@@ -71,21 +72,24 @@ const Payment = () => {
                             <h3>Select Payment Method</h3>
                             <div className="method-options">
                                 <button
-                                    className={`method-option $selectedMethod === 'card' ? 'active' : ''}`}
+                                    type="button"
+                                    className={`method-option ${selectedMethod === 'card' ? 'active' : ''}`}
                                     onClick={() => setSelectedMethod('card')}
                                 >
                                     <i className="fas fa-credit-card"></i>
                                     Credit/Debit Card
                                 </button>
                                 <button
-                                    className={`method-option $selectedMethod === 'paypal' ? 'active' : ''}`}
+                                    type="button"
+                                    className={`method-option ${selectedMethod === 'paypal' ? 'active' : ''}`}
                                     onClick={() => setSelectedMethod('paypal')}
                                 >
                                     <i className="fab fa-paypal"></i>
                                     PayPal
                                 </button>
                                 <button
-                                    className={`method-option $selectedMethod === 'apple' ? 'active' : ''}`}
+                                    type="button"
+                                    className={`method-option ${selectedMethod === 'apple' ? 'active' : ''}`}
                                     onClick={() => setSelectedMethod('apple')}
                                 >
                                     <i className="fab fa-apple"></i>
@@ -162,7 +166,7 @@ const Payment = () => {
                                     className="btn btn-primary payment-btn"
                                     disabled={loading}
                                 >
-                                    {loading ? 'Processing...' : `Pay Rs$total.toFixed(2)}`}
+                                    {loading ? 'Processing...' : `Pay Rs${total.toFixed(2)}`}
                                 </button>
                             </form>
                         )}
@@ -172,7 +176,7 @@ const Payment = () => {
                                 <i className="fab fa-paypal"></i>
                                 <h3>Pay with PayPal</h3>
                                 <p>You will be redirected to PayPal to complete your payment.</p>
-                                <button className="btn btn-paypal">
+                                <button type="button" className="btn btn-paypal">
                                     Continue with PayPal
                                 </button>
                             </div>
@@ -183,7 +187,7 @@ const Payment = () => {
                                 <i className="fab fa-apple"></i>
                                 <h3>Pay with Apple Pay</h3>
                                 <p>Complete your payment using Apple Pay.</p>
-                                <button className="btn btn-apple">
+                                <button type="button" className="btn btn-apple">
                                     Pay with Apple Pay
                                 </button>
                             </div>
@@ -204,7 +208,7 @@ const Payment = () => {
                                         <p>Qty: {item.quantity}</p>
                                     </div>
                                     <div className="item-price">
-                                        $(item.rentalPrice * item.quantity).toFixed(2)}
+                                        Rs{(item.rentalPrice * item.quantity).toFixed(2)}
                                     </div>
                                 </div>
                             ))}
@@ -212,19 +216,19 @@ const Payment = () => {
                         <div className="summary-totals">
                             <div className="summary-row">
                                 <span>Subtotal</span>
-                                <span>$subtotal.toFixed(2)}</span>
+                                <span>Rs{subtotal.toFixed(2)}</span>
                             </div>
                             <div className="summary-row">
                                 <span>Delivery</span>
-                                <span>$deliveryFee.toFixed(2)}</span>
+                                <span>Rs{deliveryFee.toFixed(2)}</span>
                             </div>
                             <div className="summary-row">
                                 <span>Tax</span>
-                                <span>$tax.toFixed(2)}</span>
+                                <span>Rs{tax.toFixed(2)}</span>
                             </div>
                             <div className="summary-row total">
                                 <span>Total</span>
-                                <span>$total.toFixed(2)}</span>
+                                <span>Rs{total.toFixed(2)}</span>
                             </div>
                         </div>
                     </div>

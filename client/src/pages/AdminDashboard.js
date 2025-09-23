@@ -371,7 +371,7 @@ const AdminDashboard = () => {
                                     <div className="product-info">
                                         <h4>{product.name}</h4>
                                         <p className="product-brand">{product.brand || 'No brand'}</p>
-                                        <p className="product-price">${product.rentalPrice}/day</p>
+                                        <p className="product-price">Rs{product.rentalPrice}/day</p>
                                         <span className={`availability ${product.available ? 'available' : 'unavailable'}`}>
                                             {product.available ? 'Available' : 'Rented'}
                                         </span>

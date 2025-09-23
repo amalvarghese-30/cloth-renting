@@ -1,3 +1,4 @@
+// About.js - Updated with actual icons
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './About.css';
@@ -29,7 +30,7 @@ const About = () => {
                     </div>
                     <div className="hero-image">
                         <img
-                            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            src="https://images.pexels.com/photos/1884584/pexels-photo-1884584.jpeg"
                             alt="Fashion rental concept"
                         />
                     </div>
@@ -40,7 +41,7 @@ const About = () => {
                     <div className="mission-cards">
                         <div className="mission-card">
                             <div className="mission-icon">
-                                <i className="fas fa-leaf"></i>
+                                <i className="fas fa-recycle"></i>
                             </div>
                             <h3>Sustainability</h3>
                             <p>
@@ -51,7 +52,7 @@ const About = () => {
                         </div>
                         <div className="mission-card">
                             <div className="mission-icon">
-                                <i className="fas fa-tshirt"></i>
+                                <i className="fas fa-universal-access"></i>
                             </div>
                             <h3>Accessibility</h3>
                             <p>
@@ -62,7 +63,7 @@ const About = () => {
                         </div>
                         <div className="mission-card">
                             <div className="mission-icon">
-                                <i className="fas fa-heart"></i>
+                                <i className="fas fa-users"></i>
                             </div>
                             <h3>Community</h3>
                             <p>
@@ -78,6 +79,9 @@ const About = () => {
                     <h2>Our Values</h2>
                     <div className="values-content">
                         <div className="value-item">
+                            <div className="value-icon">
+                                <i className="fas fa-award"></i>
+                            </div>
                             <h3>Quality First</h3>
                             <p>
                                 We meticulously curate our collection and maintain each item to
@@ -86,6 +90,9 @@ const About = () => {
                             </p>
                         </div>
                         <div className="value-item">
+                            <div className="value-icon">
+                                <i className="fas fa-heart"></i>
+                            </div>
                             <h3>Customer Centric</h3>
                             <p>
                                 Your satisfaction is our priority. We offer flexible rental periods,
@@ -94,6 +101,9 @@ const About = () => {
                             </p>
                         </div>
                         <div className="value-item">
+                            <div className="value-icon">
+                                <i className="fas fa-lightbulb"></i>
+                            </div>
                             <h3>Innovation Driven</h3>
                             <p>
                                 We continuously improve our platform and services to provide
@@ -102,6 +112,9 @@ const About = () => {
                             </p>
                         </div>
                         <div className="value-item">
+                            <div className="value-icon">
+                                <i className="fas fa-hand-holding-heart"></i>
+                            </div>
                             <h3>Ethically Minded</h3>
                             <p>
                                 We partner with brands that share our commitment to ethical
@@ -116,22 +129,30 @@ const About = () => {
                     <h2>How Rentique Works</h2>
                     <div className="process-steps">
                         <div className="process-step">
-                            <div className="step-number">1</div>
+                            <div className="step-icon">
+                                <i className="fas fa-search"></i>
+                            </div>
                             <h3>Browse & Select</h3>
                             <p>Explore our curated collection of fashion items for every occasion. Use filters to find exactly what you need.</p>
                         </div>
                         <div className="process-step">
-                            <div className="step-number">2</div>
+                            <div className="step-icon">
+                                <i className="fas fa-calendar-alt"></i>
+                            </div>
                             <h3>Choose Rental Period</h3>
                             <p>Select your rental dates and add damage protection if desired. Our system calculates the total cost transparently.</p>
                         </div>
                         <div className="process-step">
-                            <div className="step-number">3</div>
+                            <div className="step-icon">
+                                <i className="fas fa-lock"></i>
+                            </div>
                             <h3>Checkout Securely</h3>
                             <p>Pay online with our secure payment gateway or choose cash on delivery. Receive instant confirmation.</p>
                         </div>
                         <div className="process-step">
-                            <div className="step-number">4</div>
+                            <div className="step-icon">
+                                <i className="fas fa-tshirt"></i>
+                            </div>
                             <h3>Wear & Return</h3>
                             <p>Enjoy your rental! Return items using our simple process. We handle cleaning and maintenance.</p>
                         </div>
@@ -145,7 +166,7 @@ const About = () => {
                         and be part of the movement towards sustainable fashion. Reduce waste,
                         refresh your style, and redefine your relationship with clothing.
                     </p>
-                    <Link to="/products" className="btn btn-primary">
+                    <Link to="/products" className="btn">
                         Explore Our Collection
                     </Link>
                 </div>

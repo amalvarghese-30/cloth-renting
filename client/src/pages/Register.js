@@ -1,3 +1,4 @@
+// Register.js - Updated with consistent styling and fixed typos
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -5,7 +6,7 @@ import './Register.css';
 
 const Register = () => {
     const [formData, setFormData] = useState({
-        fiRstName: '',
+        firstName: '',
         lastName: '',
         email: '',
         password: '',
@@ -35,14 +36,14 @@ const Register = () => {
         }
 
         if (formData.password.length < 6) {
-            setError('Password must be at least 6 characteRs long');
+            setError('Password must be at least 6 characters long');
             setLoading(false);
             return;
         }
 
         try {
             await register({
-                fiRstName: formData.fiRstName,
+                firstName: formData.firstName,
                 lastName: formData.lastName,
                 email: formData.email,
                 password: formData.password
@@ -68,15 +69,15 @@ const Register = () => {
                 <form onSubmit={handleSubmit} className="register-form">
                     <div className="form-row">
                         <div className="form-group">
-                            <label htmlFor="fiRstName">FiRst Name</label>
+                            <label htmlFor="firstName">First Name</label>
                             <input
                                 type="text"
-                                id="fiRstName"
-                                name="fiRstName"
-                                value={formData.fiRstName}
+                                id="firstName"
+                                name="firstName"
+                                value={formData.firstName}
                                 onChange={handleChange}
                                 required
-                                placeholder="FiRst name"
+                                placeholder="First name"
                             />
                         </div>
                         <div className="form-group">
@@ -135,10 +136,17 @@ const Register = () => {
 
                     <button
                         type="submit"
-                        className="btn btn-primary register-btn"
+                        className="register-btn"
                         disabled={loading}
                     >
-                        {loading ? 'Creating Account...' : 'Create Account'}
+                        {loading ? (
+                            <>
+                                <span className="loading-spinner"></span>
+                                Creating Account...
+                            </>
+                        ) : (
+                            'Create Account'
+                        )}
                     </button>
                 </form>
 

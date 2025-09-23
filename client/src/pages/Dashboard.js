@@ -1,3 +1,4 @@
+// Dashboard.js - Updated with consistent styling
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -104,6 +105,9 @@ const Dashboard = () => {
                                             src={rental.product?.images?.[0] || '/placeholder-image.jpg'}
                                             alt={rental.product?.name}
                                             className="rental-image"
+                                            onError={(e) => {
+                                                e.target.src = '/placeholder-image.jpg';
+                                            }}
                                         />
                                         <div className="rental-details">
                                             <h4>{rental.product?.name || 'Unknown Product'}</h4>

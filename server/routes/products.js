@@ -3,6 +3,7 @@ const express = require('express');
 const { check, validationResult } = require('express-validator');
 const Product = require('../models/Product');
 const { auth, adminAuth } = require('../middleware/auth');
+const { sendNewProductNotification } = require('../services/emailService');
 
 const router = express.Router();
 
@@ -64,8 +65,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-
-
 // GET /api/products/:id - Get single product
 router.get('/:id', async (req, res) => {
     try {
@@ -89,7 +88,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// POST /api/products - Create product (admin only)
+// POST /api/products - Create product (admin only) with newsletter notification
 router.post('/', [auth, adminAuth], [
     check('name', 'Name is required').notEmpty(),
     check('description', 'Description is required').notEmpty(),
@@ -107,6 +106,16 @@ router.post('/', [auth, adminAuth], [
 
         const product = new Product(req.body);
         await product.save();
+
+        // Send newsletter notification to subscribers (non-blocking)
+        try {
+            await sendNewProductNotification(product);
+            console.log(`Newsletter notification sent for new product: ${product.name}`);
+        } catch (emailError) {
+            console.error('Error sending newsletter notification:', emailError);
+            // Don't fail the product creation if email fails
+        }
+
         res.status(201).json(product);
     } catch (error) {
         console.error('Create product error:', error);
