@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const nodemailer = require('nodemailer');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // Load environment variables
 dotenv.config();
@@ -17,17 +18,38 @@ console.log('SMTP_PASS:', process.env.SMTP_PASS ? 'SET (' + process.env.SMTP_PAS
 console.log('Current directory:', __dirname);
 const app = express();
 
-// Middleware
-app.use(cors());
+const corsOptions = {
+  origin: [
+    'https://rentique-frontend.onrender.com',
+    'http://localhost:3000',
+    'http://localhost:3001'
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // ADD THIS
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'] // ADD THIS
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Database connection
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('MongoDB connected successfully'))
+<<<<<<< HEAD
     .catch(err => console.error('MongoDB connection error:', err));
 
 // Create Nodemailer transporter (KEEP THIS FOR CONTACT FORM)
+=======
+    .catch(err => {
+        console.error('MongoDB connection error:', err);
+        console.log('MONGODB_URI:', process.env.MONGODB_URI ? 'is set' : 'is NOT set');
+        process.exit(1); // Exit if DB connection fails
+    });
+// Create Nodemailer transporter
+>>>>>>> 643d84298e0d7330434224d2f9fb49c4081b1433
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: process.env.SMTP_PORT,
@@ -56,20 +78,48 @@ const adminUsersRoutes = require('./routes/adminUsers');
 const newsletterRoutes = require('./routes/newsletter');
 
 // Use routes with proper prefixes
+<<<<<<< HEAD
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/admin/users', adminUsersRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/rentals', rentalRoutes);
 app.use('/api/newsletter', newsletterRoutes);
+=======
+app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
+app.use('/admin/users', adminUsersRoutes);
+app.use('/products', productRoutes);
+app.use('/rentals', rentalRoutes);
+>>>>>>> 643d84298e0d7330434224d2f9fb49c4081b1433
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
+app.get('/health', (req, res) => {
     res.json({ status: 'OK', message: 'Server is running' });
 });
 
+<<<<<<< HEAD
 // Contact form endpoint with SMTP email (KEEP THIS)
 app.post('/api/contact', async (req, res) => {
+=======
+// Stripe test endpoint
+app.get('/test-stripe', async (req, res) => {
+    try {
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: 1000, // $10.00
+            currency: 'usd',
+            metadata: { test: 'true' }
+        });
+        res.json({ success: true, clientSecret: paymentIntent.client_secret });
+    } catch (error) {
+        console.error('Stripe error:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// Contact form endpoint with SMTP email
+app.post('/contact', async (req, res) => {
+>>>>>>> 643d84298e0d7330434224d2f9fb49c4081b1433
     try {
         const { name, email, subject, message } = req.body;
 
