@@ -91,7 +91,7 @@ app.get('/test-stripe', async (req, res) => {
 });
 
 // Contact form endpoint with SMTP email
-app.post('/api/contact', async (req, res) => {
+app.post('/contact', async (req, res) => {
     try {
         const { name, email, subject, message } = req.body;
 
