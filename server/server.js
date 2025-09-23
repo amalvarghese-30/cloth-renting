@@ -19,15 +19,15 @@ console.log('Current directory:', __dirname);
 const app = express();
 
 const corsOptions = {
-  origin: [
-    'https://rentique-frontend.onrender.com',
-    'http://localhost:3000',
-    'http://localhost:3001'
-  ],
-  credentials: true,
-  optionsSuccessStatus: 200,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // ADD THIS
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'] // ADD THIS
+    origin: [
+        'https://rentique-frontend.onrender.com',
+        'http://localhost:3000',
+        'http://localhost:3001'
+    ],
+    credentials: true,
+    optionsSuccessStatus: 200,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // ADD THIS
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'] // ADD THIS
 };
 
 app.use(cors(corsOptions));
