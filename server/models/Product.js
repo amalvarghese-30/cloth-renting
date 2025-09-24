@@ -32,8 +32,7 @@ const productSchema = new mongoose.Schema({
     occasion: { type: String, enum: ['wedding', 'party', 'formal', 'casual', 'festive'] },
     material: { type: String },
     color: { type: String },
-    condition: { type: String, enum: ['new', 'excellent', 'good', 'fair','Like New
-'], default: 'excellent' },
+    condition: { type: String, enum: ['new', 'excellent', 'good', 'fair'], default: 'excellent' },
     rentalCount: { type: Number, default: 0 },
     ratings: [ratingSchema],
     averageRating: { type: Number, default: 0, min: 0, max: 5 },
