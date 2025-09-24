@@ -19,7 +19,7 @@ const productSchema = new mongoose.Schema({
         required: true,
         enum: ['formal', 'casual', 'party', 'traditional', 'accessories', 'pants', 'shirts', 'dresses', 'suits', 'jackets', 'shoes']
     },
-    size: { type: String, required: true, enum: ['XS', 'S', 'M', 'L', 'XL', 'XXL'] },
+    size: { type: String, required: true, enum: ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'One Size'] },
     brand: { type: String, required: true },
     images: [{ type: String, required: true }],
     available: { type: Boolean, default: true },

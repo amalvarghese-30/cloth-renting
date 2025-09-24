@@ -4,9 +4,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const nodemailer = require('nodemailer');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-// Load environment variables
+// Load environment variables FIRST
 dotenv.config();
 
 // Add this at the top of server.js after dotenv.config()
@@ -15,7 +14,12 @@ console.log('SMTP_HOST:', process.env.SMTP_HOST || 'NOT SET');
 console.log('SMTP_PORT:', process.env.SMTP_PORT || 'NOT SET');
 console.log('SMTP_USER:', process.env.SMTP_USER || 'NOT SET');
 console.log('SMTP_PASS:', process.env.SMTP_PASS ? 'SET (' + process.env.SMTP_PASS.length + ' chars)' : 'NOT SET');
+console.log('STRIPE_SECRET_KEY:', process.env.STRIPE_SECRET_KEY ? 'SET (' + process.env.STRIPE_SECRET_KEY.substring(0, 10) + '...)' : 'NOT SET');
 console.log('Current directory:', __dirname);
+
+// Initialize Stripe AFTER environment variables are loaded
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
 const app = express();
 
 const corsOptions = {
