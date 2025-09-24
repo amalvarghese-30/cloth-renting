@@ -77,12 +77,12 @@ const adminUsersRoutes = require('./routes/adminUsers');
 const newsletterRoutes = require('./routes/newsletter');
 
 // Use routes with proper prefixes
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/admin/users', adminUsersRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/rentals', rentalRoutes);
-app.use('/api/newsletter', newsletterRoutes);
+app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
+app.use('/admin/users', adminUsersRoutes);
+app.use('/products', productRoutes);
+app.use('/rentals', rentalRoutes);
+app.use('/newsletter', newsletterRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
@@ -90,7 +90,7 @@ app.get('/health', (req, res) => {
 });
 
 // Contact form endpoint with SMTP email (KEEP THIS)
-app.post('/api/contact', async (req, res) => {
+app.post('/contact', async (req, res) => {
     try {
         const { name, email, subject, message } = req.body;
 
