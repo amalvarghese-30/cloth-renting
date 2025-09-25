@@ -12,6 +12,7 @@ const ProductDetail = ({ onRentClick }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -40,7 +41,7 @@ const ProductDetail = ({ onRentClick }) => {
   const handleAddReview = async (reviewData) => {
     try {
       const updatedProduct = await productService.addRating(product._id, reviewData);
-      setProduct(updatedProduct); // ✅ update reviews immediately
+      setProduct(updatedProduct);
     } catch (err) {
       console.error('Error adding review:', err);
       alert('Failed to add review');
@@ -68,7 +69,7 @@ const ProductDetail = ({ onRentClick }) => {
     rentalPrice: 0,
     available: false,
     images: [],
-    ...product
+    ...product,
   };
 
   const mainImage =
@@ -84,6 +85,7 @@ const ProductDetail = ({ onRentClick }) => {
         </button>
 
         <div className="product-content">
+          {/* Images */}
           <div className="product-images">
             <div className="main-image">
               <img
@@ -109,22 +111,27 @@ const ProductDetail = ({ onRentClick }) => {
             )}
           </div>
 
+          {/* Product Info */}
           <div className="product-info">
             <h1>{safeProduct.name}</h1>
             <p className="brand">{safeProduct.brand}</p>
             <p className="category">{safeProduct.category}</p>
 
+            {/* Rating Summary */}
+            <div className="rating-section">
+              <StarRating rating={safeProduct.averageRating || 0} size="large" readOnly />
+              <span className="rating-text">({safeProduct.totalRatings || 0} reviews)</span>
+            </div>
+
+            {/* Price & Availability */}
             <div className="price-section">
               <span className="rental-price">Rs{safeProduct.rentalPrice}/day</span>
               <span className={`availability ${safeProduct.available ? 'available' : 'unavailable'}`}>
                 {safeProduct.available ? 'Available' : 'Unavailable'}
               </span>
             </div>
-                <div className="rating-summary">
-        <StarRating value={safeProduct.averageRating || 0} readOnly />
-        <span>({safeProduct.totalRatings || 0} reviews)</span>
-    </div>
 
+            {/* Description & Specs */}
             <div className="product-details">
               <h3>Description</h3>
               <p>{safeProduct.description}</p>
@@ -165,26 +172,7 @@ const ProductDetail = ({ onRentClick }) => {
 
         {/* Reviews Section */}
         <div className="reviews-section">
-          <h3>Reviews ({safeProduct.ratings.length})</h3>
-          {safeProduct.ratings.length > 0 ? (
-            safeProduct.ratings.map((r) => (
-              <div key={r._id} className="review-item">
-                <StarRating value={r.rating} readOnly />
-                <p>{r.comment}</p>
-                <small>by {r.userName}</small>
-              </div>
-            ))
-          ) : (
-            <p>No reviews yet.</p>
-          )}
-
-          {/* Add review form */}
-          {user && (
-            <ProductReviews
-              product={safeProduct}
-              onAddReview={handleAddReview}
-            />
-          )}
+          <ProductReviews product={safeProduct} onAddReview={handleAddReview} />
         </div>
       </div>
     </div>
