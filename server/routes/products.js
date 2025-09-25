@@ -123,29 +123,32 @@ router.post('/', [auth, adminAuth], [
     }
 });
 
-// PUT /api/products/:id - Update product (admin only)
 // PUT /api/products/:id - Update product (admin only) with price change notifications
 router.put('/:id', [auth, adminAuth], async (req, res) => {
     try {
-        // Step 1: Find the product first
         const product = await Product.findById(req.params.id);
         if (!product) return res.status(404).json({ message: 'Product not found' });
 
-        // Step 2: Check if price or rentalPrice is changing
-        const priceChanged = req.body.price && req.body.price !== product.price;
-        const rentalPriceChanged = req.body.rentalPrice && req.body.rentalPrice !== product.rentalPrice;
+        const oldPrice = product.price;
+        const oldRentalPrice = product.rentalPrice;
 
-        // Step 3: Update the product
+        const priceDropped = req.body.price && req.body.price < oldPrice;
+        const rentalPriceDropped = req.body.rentalPrice && req.body.rentalPrice < oldRentalPrice;
+
+        // Update the product
         Object.assign(product, req.body);
         await product.save();
 
-        // Step 4: Send notification if key fields changed
-        if (priceChanged || rentalPriceChanged) {
+        // Send newsletter based on condition
+        if (priceDropped || rentalPriceDropped) {
             try {
-                await sendNewProductNotification(product); // You might want to modify the email content for updates
-                console.log(`Newsletter notification sent for updated product: ${product.name}`);
+                await sendNewProductNotification(product, 'priceDrop', {
+                    oldPrice,
+                    oldRentalPrice
+                });
+                console.log(`Price drop notification sent for product: ${product.name}`);
             } catch (emailError) {
-                console.error('Error sending newsletter notification:', emailError);
+                console.error('Error sending price drop newsletter:', emailError);
             }
         }
 
@@ -155,6 +158,28 @@ router.put('/:id', [auth, adminAuth], async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+// POST /api/products (new product creation)
+router.post('/', [auth, adminAuth], async (req, res) => {
+    try {
+        const product = new Product(req.body);
+        await product.save();
+
+        // Send newsletter for new product
+        try {
+            await sendNewProductNotification(product, 'new');
+            console.log(`New product newsletter sent: ${product.name}`);
+        } catch (emailError) {
+            console.error('Error sending newsletter for new product:', emailError);
+        }
+
+        res.status(201).json(product);
+    } catch (error) {
+        console.error('Create product error:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 
 
 // DELETE /api/products/:id - Delete product (admin only)
