@@ -196,6 +196,7 @@ router.delete('/:id', [auth, adminAuth], async (req, res) => {
     }
 });
 
+
 // POST /api/products/:id/ratings - Add rating to product
 router.post('/:id/ratings', auth, [
     check('rating', 'Rating is required and must be between 1-5').isInt({ min: 1, max: 5 }),
@@ -224,6 +225,11 @@ router.post('/:id/ratings', auth, [
         };
 
         product.ratings.push(newRating);
+
+        // Update totalRatings and averageRating
+        product.totalRatings = product.ratings.length;
+        product.averageRating = product.ratings.reduce((sum, r) => sum + r.rating, 0) / product.totalRatings;
+
         await product.save();
 
         res.json({ message: 'Rating added successfully', product });
@@ -232,5 +238,6 @@ router.post('/:id/ratings', auth, [
         res.status(500).json({ message: 'Server error' });
     }
 });
+
 
 module.exports = router;
