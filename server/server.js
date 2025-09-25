@@ -7,7 +7,7 @@ const nodemailer = require('nodemailer');
 
 // Load environment variables FIRST
 dotenv.config();
-
+app.use(cors());
 // Add this at the top of server.js after dotenv.config()
 console.log('🔍 DEBUG - Environment Variables:');
 console.log('SMTP_HOST:', process.env.SMTP_HOST || 'NOT SET');
