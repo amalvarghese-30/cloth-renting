@@ -38,18 +38,18 @@ const handleSubmitReview = async () => {
         <div className="product-reviews">
             <h3>Customer Reviews</h3>
 
-            <div className="reviews-summary">
-                <div className="average-rating">
-                    {/* FIX: Use safeProduct.averageRating with fallback */}
-                    <span className="rating-number">
-                        {safeProduct.averageRating?.toFixed(1) || '0.0'}
-                    </span>
-                    <StarRating rating={safeProduct.averageRating || 0} size="large" />
-                    <span className="total-ratings">
-                        ({safeProduct.totalRatings || 0} reviews)
-                    </span>
-                </div>
-            </div>
+<div className="reviews-summary">
+    <div className="average-rating">
+        <span className="rating-number">
+            {product.averageRating?.toFixed(1) || '0.0'}
+        </span>
+        <StarRating rating={product.averageRating || 0} size="large" />
+        <span className="total-ratings">
+            ({product.totalRatings || 0} reviews)
+        </span>
+    </div>
+</div>
+
 
             {user && !showReviewForm && (
                 <button
