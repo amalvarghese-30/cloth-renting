@@ -17,17 +17,22 @@ const ProductReviews = ({ product, onAddReview }) => {
         ...product
     };
 
-    const handleSubmitReview = () => {
-        if (reviewRating > 0) {
-            onAddReview({
+const handleSubmitReview = async () => {
+    if (reviewRating > 0) {
+        try {
+            await onAddReview({
                 rating: reviewRating,
                 comment: reviewComment
             });
             setReviewRating(0);
             setReviewComment('');
             setShowReviewForm(false);
+        } catch (error) {
+            console.error('Failed to submit review', error);
         }
-    };
+    }
+};
+
 
     return (
         <div className="product-reviews">
