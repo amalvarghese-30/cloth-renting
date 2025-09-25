@@ -24,13 +24,14 @@ const Footer = () => {
         setSubscriptionStatus('');
 
         try {
-            const response = await fetch('http://localhost:5000/api/newsletter/subscribe', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email }),
-            });
+            const response = await fetch('https://rentique-gybf.onrender.com/newsletter/subscribe', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email }),
+});
+
 
             const data = await response.json();
 
