@@ -26,13 +26,17 @@ const Contact = () => {
         setError('');
 
         try {
-            const response = await fetch('http://localhost:5000/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
+            const response = await fetch(
+  `${process.env.REACT_APP_API_URL}/contact`,
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  }
+);
+
 
             const data = await response.json();
 
