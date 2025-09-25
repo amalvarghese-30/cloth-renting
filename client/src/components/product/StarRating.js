@@ -1,7 +1,7 @@
 import React from 'react';
 import './StarRating.css';
 
-const StarRating = ({ rating = 0, onRatingChange, editable = false, size = 'medium' }) => {
+const StarRating = ({ rating, onRatingChange, editable = false, size = 'medium' }) => {
     const handleClick = (newRating) => {
         if (editable && onRatingChange) {
             onRatingChange(newRating);
