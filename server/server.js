@@ -7,7 +7,7 @@ const nodemailer = require('nodemailer');
 
 // Load environment variables FIRST
 dotenv.config();
-app.use(cors());
+
 // Add this at the top of server.js after dotenv.config()
 console.log('🔍 DEBUG - Environment Variables:');
 console.log('SMTP_HOST:', process.env.SMTP_HOST || 'NOT SET');
@@ -21,7 +21,7 @@ console.log('Current directory:', __dirname);
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
-
+app.use(cors());
 const corsOptions = {
     origin: [
         'https://rentique-frontend.onrender.com',
