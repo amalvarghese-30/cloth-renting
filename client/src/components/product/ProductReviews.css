@@ -131,6 +131,25 @@
     text-align: center;
     padding: 2rem;
 }
+/* Star styling */
+.star {
+    font-size: 24px;       /* Adjust size as needed */
+    color: #ccc;           /* Grey for empty stars */
+    cursor: pointer;
+}
+
+.star.filled {
+    color: #FFD700;        /* Golden color for filled stars */
+}
+
+.star.large {
+    font-size: 32px;
+}
+
+.star.small {
+    font-size: 16px;
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
