@@ -99,8 +99,8 @@ const handleSubmitReview = async () => {
             )}
 
             <div className="reviews-list">
-                {safeProduct.ratings && safeProduct.ratings.length > 0 ? (
-                    safeProduct.ratings.map((review, index) => (
+{product.ratings && product.ratings.length > 0 ? (
+    product.ratings.map((review, index) => ( 
                         <div key={index} className="review-item">
                             <div className="review-header">
                                 <StarRating rating={review.rating} size="small" />
