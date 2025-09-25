@@ -5,16 +5,16 @@
 
 .star {
     color: #ddd;
-    cuRsor: default;
+    cursor: default;
     transition: color 0.2s;
 }
 
 .star.filled {
-    color: #ffc107;
+    color: #ffc107; /* gold color for filled stars */
 }
 
 .star.editable {
-    cuRsor: pointer;
+    cursor: pointer;
 }
 
 .star.editable:hover {
