@@ -120,6 +120,10 @@ const ProductDetail = ({ onRentClick }) => {
                 {safeProduct.available ? 'Available' : 'Unavailable'}
               </span>
             </div>
+                <div className="rating-summary">
+        <StarRating value={safeProduct.averageRating || 0} readOnly />
+        <span>({safeProduct.totalRatings || 0} reviews)</span>
+    </div>
 
             <div className="product-details">
               <h3>Description</h3>
